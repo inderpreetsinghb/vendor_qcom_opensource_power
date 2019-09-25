@@ -1,3 +1,4 @@
+ifeq ($(TARGET_POWERHAL_VARIANT),qcom)
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(call is-vendor-board-platform,QCOM),true)
@@ -71,8 +72,16 @@ ifeq ($(call is-board-platform-in-list,qcs605), true)
 LOCAL_SRC_FILES += power-710.c
 endif
 
+ifeq ($(call is-board-platform-in-list,trinket), true)
+LOCAL_SRC_FILES += power-6125.c
+endif
+
 ifeq ($(call is-board-platform-in-list,msmnile), true)
 LOCAL_SRC_FILES += power-msmnile.c
+endif
+
+ifeq ($(call is-board-platform-in-list,msm8916), true)
+LOCAL_SRC_FILES += power-8916.c
 endif
 
 ifeq ($(TARGET_USES_INTERACTION_BOOST),true)
@@ -87,3 +96,4 @@ LOCAL_VENDOR_MODULE := true
 include $(BUILD_EXECUTABLE)
 
 endif
+endif #TARGET_POWERHAL_VARIANT
